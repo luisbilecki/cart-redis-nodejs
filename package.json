@@ -1,0 +1,10 @@
+{
+  "name": "cart-redis-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Luis F. Bilecki <luis.bilecki@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
