@@ -27,6 +27,9 @@ app.delete('/carts/:session/items', (req, res) => cartController.deleteCartItem(
 // Delete user cart
 app.delete('/carts/:session', (req, res) => cartController.clearCart(req, res, redisInstance));
 
+// Error handling
+app.use(require('./errors/handler'));
+
 const serverPort = process.env.SERVER_PORT || 3000;
 
 app.listen(serverPort, ()=> {
