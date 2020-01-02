@@ -4,14 +4,19 @@
   "main": "index.js",
   "author": "Luis F. Bilecki <luis.bilecki@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "ioredis-mock": "^4.19.0"
+    "ioredis-mock": "^4.19.0",
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "ioredis": "^4.14.1"
+    "ioredis": "^4.14.1",
+    "morgan": "^1.9.1"
   }
 }
