@@ -30,7 +30,6 @@ const updateCartItem = async(req, res, next, redis) => {
 
   const cartItem = await redis.hget(key, sku);
 
-  // Item found! Can update!
   if (cartItem) {
     const result = await redis.hmset(cartKey(session), sku, quantity);
     res.json({ success: !!result });
