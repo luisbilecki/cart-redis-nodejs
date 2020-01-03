@@ -6,7 +6,7 @@ const expireCartTime = process.env.EXPIRE_CART_TIME || 1800; // in seconds
 const getCart = async(req, res, redis) => {
   const { session } = req.params;
 
-  const items = redis.hgetall(cartKey(session));
+  const items = await redis.hgetall(cartKey(session));
   res.json({ success: true, items });
 };
 
@@ -24,15 +24,15 @@ const addCartItem = async(req, res, redis) => {
 };
 
 const updateCartItem = async(req, res, next, redis) => {
-  const { session, item } = req.params;
+  const { session, sku } = req.params;
   const { quantity } = req.body;
   const key = cartKey(session);
 
-  const cartItem = await redis.hget(key, item);
+  const cartItem = await redis.hget(key, sku);
 
   // Item found! Can update!
   if (cartItem) {
-    const result = await redis.hmset(cartKey(session), item, quantity);
+    const result = await redis.hmset(cartKey(session), sku, quantity);
     res.json({ success: !!result });
   } else {
     next(DefaultError.notFound(req, 'Item not found'));
@@ -40,8 +40,8 @@ const updateCartItem = async(req, res, next, redis) => {
 };
 
 const deleteCartItem = async(req, res, redis) => {
-  const { session, item } = req.params;
-  const result = await redis.hdel(cartKey(session), item);
+  const { session, sku } = req.params;
+  const result = await redis.hdel(cartKey(session), sku);
 
   res.json({ success: !!result });
 };
