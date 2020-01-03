@@ -56,7 +56,7 @@ describe('Cart Controller', () => {
       const result = await request(app)
         .post(`/carts/${sessionId}/items`)
         .send({
-          sku: 9000,
+          itemId: 9000,
           quantity: 1,
         })
         .set('Accept', 'application/json');
@@ -69,8 +69,8 @@ describe('Cart Controller', () => {
     });
   });
 
-  describe('PUT /carts/:session/items/:sku', () => {
-    it('should return 400 with invalid sku in path', () => {
+  describe('PUT /carts/:session/items/:itemId', () => {
+    it('should return 400 with invalid itemId in path', () => {
       return request(app)
         .put(`/carts/${getSession()}/items/abc`)
         .send({})
@@ -117,7 +117,7 @@ describe('Cart Controller', () => {
     });    
   });
 
-  describe('DELETE /carts/:session/items/:sku', () => {
+  describe('DELETE /carts/:session/items/:itemId', () => {
     it('should delete item from cart', async() => {
       const sessionId = getSession();
       await addCartItem(sessionId, 9100, 3);
@@ -135,7 +135,7 @@ describe('Cart Controller', () => {
       });
     });
 
-    it('should return success false with unknown sku', (done) => {
+    it('should return success false with unknown itemId', (done) => {
       request(app)
         .delete(`/carts/${getSession()}/items/9100`)
         .set('Accept', 'application/json')
@@ -146,9 +146,9 @@ describe('Cart Controller', () => {
         });
     });
 
-    it('should return 400 when sku is not integer', () => {
+    it('should return 400 when itemId is not integer', () => {
       return request(app)
-        .delete(`/carts/${getSession()}/items/invalid-sku`)
+        .delete(`/carts/${getSession()}/items/invalid-itemId`)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(400);

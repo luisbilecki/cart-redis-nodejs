@@ -23,7 +23,7 @@ router.post(
 
 // Update cart item
 router.put(
-  '/:session/items/:sku', 
+  '/:session/items/:itemId', 
   updateItemRules, 
   validatorMiddleware, 
   (req, res, next) => cartController.updateCartItem(req, res, next, redisInstance)
@@ -31,7 +31,7 @@ router.put(
 
 // Delete cart items
 router.delete(
-  '/:session/items/:sku', 
+  '/:session/items/:itemId', 
   deleteItemRules, 
   validatorMiddleware, 
   (req, res) => cartController.deleteCartItem(req, res, redisInstance)

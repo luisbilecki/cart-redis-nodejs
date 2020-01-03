@@ -12,10 +12,10 @@ const getCart = async(req, res, redis) => {
 
 const addCartItem = async(req, res, redis) => {
   const { session } = req.params;
-  const { sku, quantity } = req.body;
+  const { itemId, quantity } = req.body;
   const key = cartKey(session);
 
-  const result = await redis.hset(key, sku, quantity);
+  const result = await redis.hset(key, itemId, quantity);
 
   // It was better that expire command runs with hset in only one command
   await redis.expire(key, expireCartTime);
@@ -24,14 +24,14 @@ const addCartItem = async(req, res, redis) => {
 };
 
 const updateCartItem = async(req, res, next, redis) => {
-  const { session, sku } = req.params;
+  const { session, itemId } = req.params;
   const { quantity } = req.body;
   const key = cartKey(session);
 
-  const cartItem = await redis.hget(key, sku);
+  const cartItem = await redis.hget(key, itemId);
 
   if (cartItem) {
-    const result = await redis.hmset(cartKey(session), sku, quantity);
+    const result = await redis.hmset(cartKey(session), itemId, quantity);
     res.json({ success: !!result });
   } else {
     next(DefaultError.notFound(req, 'Item not found'));
@@ -39,8 +39,8 @@ const updateCartItem = async(req, res, next, redis) => {
 };
 
 const deleteCartItem = async(req, res, redis) => {
-  const { session, sku } = req.params;
-  const result = await redis.hdel(cartKey(session), sku);
+  const { session, itemId } = req.params;
+  const result = await redis.hdel(cartKey(session), itemId);
 
   res.json({ success: !!result });
 };
