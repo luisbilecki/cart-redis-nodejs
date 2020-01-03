@@ -1,6 +1,6 @@
 # Cart management with Redis in Node.JS
 
-This repository contains an approach to store the customers' shopping cart in Redis. This approach was based in RedisLabs usage example ([see here](https://redislabs.com/ebook/part-1-getting-started/chapter-2-anatomy-of-a-redis-web-application/2-2-shopping-carts-in-redis/)) and another example ((Cart Management Service)[http://alronz.github.io/Factors-Influencing-NoSQL-Adoption/site/Redis/Examples/Cart%20Management%20Service/]).
+This repository contains an approach to store the customers' shopping cart in Redis. This approach was based in RedisLabs usage example ([see here](https://redislabs.com/ebook/part-1-getting-started/chapter-2-anatomy-of-a-redis-web-application/2-2-shopping-carts-in-redis/)) and another example ([Cart Management Service](http://alronz.github.io/Factors-Influencing-NoSQL-Adoption/site/Redis/Examples/Cart%20Management%20Service/)).
 
 --------------
 
