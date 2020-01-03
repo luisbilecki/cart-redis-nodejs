@@ -1,6 +1,6 @@
 const { serializeError } = require('serialize-error');
 
-const { isProduction } = require('../helpers/env');
+const { isProd } = require('../helpers/env');
 
 const getRequestPath = (req) => {
   return req.path;
@@ -9,7 +9,7 @@ const getRequestPath = (req) => {
 const getErrorMessage = (err) => {
   const serializedError = serializeError(err);
 
-  if (isProduction()) {
+  if (isProd()) {
     return serializedError && serializedError.message || serializedError;
   } else {
     return serializedError;
